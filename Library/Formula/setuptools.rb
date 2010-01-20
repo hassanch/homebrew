@@ -6,13 +6,16 @@ class Setuptools <Formula
   md5 '7df2a529a074f613b509fb44feefe74e'
   version '0.6c11'
 
+  depends_on 'python' => :recommended
+
   def install
     dest=prefix+'lib/setuptools'
+    python=File::exists?("#{HOMEBREW_PREFIX}/bin/python") ? "#{HOMEBREW_PREFIX}/bin/python" : "python"
     FileUtils.mkdir_p dest
     ENV.append 'PYTHONPATH', dest, ":"
-    system "python", "setup.py", "install", "--prefix=#{prefix}", "--install-lib=#{dest}"
+    system "#{python}", "setup.py", "install", "--prefix=#{prefix}", "--install-lib=#{dest}"
 
-    site_packages = `python -c "from distutils.sysconfig import get_python_lib; print get_python_lib()"`.chomp
+    site_packages = `#{python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()"`.chomp
     pth = Pathname.new site_packages+'/homebrew.pth'
     ohai "Writing #{pth} to enable setuptools"
     data = DATA.read

@@ -7,6 +7,7 @@ class Wine <Formula
 
   depends_on 'jpeg'
   depends_on 'mpg123' => :optional
+  depends_on 'gnutls-32' => :optional
 
   def install
     # Wine does not compile with LLVM yet

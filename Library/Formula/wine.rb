@@ -1,8 +1,8 @@
 require 'formula'
 
 class Wine <Formula
-  url 'http://ibiblio.org/pub/linux/system/emulators/wine/wine-1.1.37.tar.bz2'
-  md5 'a9144360723c8276dffdbcea9c1028d5'
+  url 'http://ibiblio.org/pub/linux/system/emulators/wine/wine-1.1.38.tar.bz2'
+  md5 'ef5947bcb9667b75b8de4a2ce16d0ec2'
   homepage 'http://www.winehq.org/'
 
   depends_on 'jpeg'
@@ -34,6 +34,8 @@ Get winetricks with:
     wget http://www.kegel.com/wine/winetricks > #{prefix}/bin/winetricks
     chmod +x #{prefix}/bin/winetricks
     brew link wine
+Or you can do this easily with:
+    brew install winetricks
     EOS
   end
 

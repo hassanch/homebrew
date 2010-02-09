@@ -6,8 +6,6 @@ class Setuptools <Formula
   md5 '7df2a529a074f613b509fb44feefe74e'
   version '0.6c11'
 
-  depends_on 'python' => :recommended
-
   def install
     dest=prefix+'lib/setuptools'
     python=File::exists?("#{HOMEBREW_PREFIX}/bin/python") ? "#{HOMEBREW_PREFIX}/bin/python" : "python"

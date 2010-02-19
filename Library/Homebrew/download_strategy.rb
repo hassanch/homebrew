@@ -138,6 +138,13 @@ class NoUnzipCurlDownloadStrategy <CurlDownloadStrategy
   end
 end
 
+class PkgCurlDownloadStrategy <CurlDownloadStrategy
+  def stage
+    safe_system '/usr/sbin/pkgutil', '--extract', @tarball_path, File.basename(@url)
+    chdir
+  end
+end
+
 class SubversionDownloadStrategy <AbstractDownloadStrategy
   def fetch
     ohai "Checking out #{@url}"

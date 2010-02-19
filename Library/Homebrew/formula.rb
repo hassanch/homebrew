@@ -38,10 +38,16 @@ end
 class Formulary
   # Returns all formula names as strings, with or without aliases
   def self.names with_aliases=false
-    filenames = (HOMEBREW_REPOSITORY+'Library/Formula').children.select {|f| f.to_s =~ /\.rb$/ }
-    everything = filenames.map{|f| f.basename('.rb').to_s }
+    dirs = (HOMEBREW_REPOSITORY+'Library/Formula').children.select {|f| f.directory?}
+    dirs << (HOMEBREW_REPOSITORY+'Library/Formula')
+
+    filenames = Array.new
+    dirs.each {|d| filenames += d.children.select {|f| f.to_s =~ /\.rb$/ and f.size > 0 }}
+    
+    # filenames = (HOMEBREW_REPOSITORY+'Library/Formula').children.select {|f| f.to_s =~ /\.rb$/ }
+    everything = filenames.map{|f| f.to_s.sub(HOMEBREW_REPOSITORY+'Library/Formula/', '').sub(/\.rb$/, '')}
     everything.push *Formulary.get_aliases.keys if with_aliases
-    everything.sort
+    everything.sort    
   end
 
   def self.paths
@@ -58,7 +64,7 @@ class Formulary
   # yields once for each
     Formulary.names.each do |name|
       require Formula.path(name)
-      klass_name = Formula.class_s(name)
+      klass_name = Formula.class_s(Formula.path(name).basename.to_s.sub(/\.rb$/, ''))
       klass = eval(klass_name)
       yield name, klass
     end
@@ -270,7 +276,7 @@ class Formula
       end
     end
     begin
-      klass_name =self.class_s(name)
+      klass_name = self.class_s(path.basename.to_s.sub(/\.rb$/, ''))
       klass = eval(klass_name)
     rescue NameError
       # TODO really this text should be encoded into the exception

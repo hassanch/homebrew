@@ -5,9 +5,8 @@ class Curl <Formula
   homepage 'http://curl.haxx.se'
   md5 '79a8fbb2eed5464b97bdf94bee109380'
 
-  def keg_only? ; <<-EOS
-OS X provides curl already. So we'll do this keg_only.
-    EOS
+  def keg_only?
+    :provided_by_osx
   end
 
   def install

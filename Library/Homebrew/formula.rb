@@ -265,6 +265,9 @@ class Formula
       require name
       name = path.stem
     else
+      # This allows us to ensure we get the right 'name' even when
+      # paths are involved.
+      name = path.stem
       begin
         require self.path(name)
       rescue LoadError => e
@@ -276,7 +279,7 @@ class Formula
       end
     end
     begin
-      klass_name = self.class_s(path.basename.to_s.sub(/\.rb$/, ''))
+      klass_name = self.class_s(name)
       klass = eval(klass_name)
     rescue NameError
       # TODO really this text should be encoded into the exception

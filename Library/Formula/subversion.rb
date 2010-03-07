@@ -22,9 +22,7 @@ class Subversion <Formula
 
   # Only need this on Snow Leopard; for Leopard the deps package 
   # builds it.
-  if MACOS_VERSION >= 10.6
-    depends_on 'neon'
-  end
+  depends_on 'neon' if MACOS_VERSION >= 10.6
 
   def setup_leopard
     # Slot dependencies into place

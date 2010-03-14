@@ -6,6 +6,7 @@ class Gnutls32 <Formula
   @sha1='5121c52efd4718ad3d8b641d28343b0c6abaa571'
 
   depends_on 'libgcrypt-32'
+  depends_on 'libgpg-error-32'
 
   def keg_only? ; <<-EOS
 We don't want this conflicting as it is only here for wine... so keg_only it

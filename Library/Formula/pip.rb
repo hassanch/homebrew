@@ -28,7 +28,10 @@ if __name__ == '__main__':
   end
 
   def install
-    dest = prefix+"lib/pip"
+    dest = "#{prefix}/lib/pip"
+    python=File::exists?("#{HOMEBREW_PREFIX}/bin/python") ? "#{HOMEBREW_PREFIX}/bin/python" : "python"
+    system "#{python}", "setup.py", "install", "--prefix=#{prefix}",
+                                            "--install-purelib=#{dest}"
 
     # make sure we use the right python (distutils rewrites the shebang)
     # also adds the pip lib path to the PYTHONPATH

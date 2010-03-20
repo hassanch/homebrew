@@ -8,10 +8,12 @@ class Bazaar <Formula
   aka :bzr
 
   def install
+    python=File::exists?("#{HOMEBREW_PREFIX}/bin/python") ? "#{HOMEBREW_PREFIX}/bin/python" : "python"
+    
     ENV.minimal_optimization
     inreplace 'setup.py', 'man/man1', 'share/man/man1'
-    system "python", "setup.py", "build"
-    system "python", "setup.py", "install", "--prefix=#{prefix}"
+    system "#{python}", "setup.py", "build"
+    system "#{python}", "setup.py", "install", "--prefix=#{prefix}"
   end
 
   def caveats; <<-EOS

@@ -15,8 +15,8 @@ end
 
 class Subversion <Formula
   url 'http://subversion.tigris.org/downloads/subversion-1.6.9.tar.bz2'
+  homepage 'http://subversion.tigris.org/'
   md5 '9c30a47b1d48664e7afef68bb4834c53'
-  homepage 'http://subversion.apache.org/'
   
   aka :svn
 

@@ -16,7 +16,10 @@ class ModPython <Formula
   end
 
   def install
-    system "./configure", "--prefix=#{prefix}", "--disable-debug", "--disable-dependency-tracking"
+    python=File::exists?("#{HOMEBREW_PREFIX}/bin/python") ? "#{HOMEBREW_PREFIX}/bin/python" : "python"
+    system "./configure", "--prefix=#{prefix}", 
+        "--disable-debug", "--disable-dependency-tracking", 
+        "--with-python=#{python}"
     
     inreplace 'Makefile' do |s|
       # Don't install to the system Apache libexec folder

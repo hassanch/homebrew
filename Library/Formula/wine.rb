@@ -1,12 +1,15 @@
 require 'formula'
 
 class Wine <Formula
-  url 'http://ibiblio.org/pub/linux/system/emulators/wine/wine-1.1.37.tar.bz2'
-  md5 'a9144360723c8276dffdbcea9c1028d5'
+  url 'http://downloads.sourceforge.net/project/wine/Source/wine-1.1.40.tar.bz2'
+  sha1 '9819dd49c1eefe48ec03de00753a38e9fcc1daf5'
   homepage 'http://www.winehq.org/'
 
   depends_on 'jpeg'
   depends_on 'mpg123' => :optional
+  depends_on 'gnutls-32' => :optional
+  depends_on 'libgcrypt-32' => :optional
+  depends_on 'libgpg-error-32' => :optional
 
   def install
     # Wine does not compile with LLVM yet
@@ -30,9 +33,7 @@ class Wine <Formula
 
   def caveats; <<-EOS
 Get winetricks with:
-    wget http://www.kegel.com/wine/winetricks > #{prefix}/bin/winetricks
-    chmod +x #{prefix}/bin/winetricks
-    brew link wine
+    brew install winetricks
     EOS
   end
 

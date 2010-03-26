@@ -28,6 +28,7 @@ if __name__ == '__main__':
   end
 
   def install
+    python=File::exists?("#{HOMEBREW_PREFIX}/bin/python") ? "#{HOMEBREW_PREFIX}/bin/python" : "python"
     dest = prefix+"lib/pip"
 
     # make sure we use the right python (distutils rewrites the shebang)
@@ -36,7 +37,7 @@ if __name__ == '__main__':
 
     # FIXME? If we use /usr/bin/env python in the pip script
     # then should we be hardcoding this version? I dunno.
-    python_version = `python -V 2>&1`.match('Python (\d+\.\d+)').captures.at(0)
+    python_version = `#{python} -V 2>&1`.match('Python (\d+\.\d+)').captures.at(0)
 
     dest.install('pip')
     cp 'pip.egg-info/PKG-INFO', "#{dest}/pip-#{version}-py#{python_version}.egg-info"

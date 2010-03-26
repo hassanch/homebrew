@@ -6,7 +6,7 @@ class XapianCore <Formula
   md5 'a6b911a68df200c99fb8f8f363fa7dad'
 
   def install
-    system "./configure", "--disable-debug", "--disable-dependency-tracking", "--prefix=#{prefix}"
+    system "./configure", "--disable-assertions", "--disable-dependency-tracking", "--prefix=#{prefix}"
     system "make install"
   end
 end

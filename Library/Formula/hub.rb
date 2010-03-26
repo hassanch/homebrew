@@ -5,6 +5,8 @@ class Hub <Formula
   homepage 'http://github.com/defunkt/hub'
   md5 '4e31316783e53ba200580d6557bb9314'
 
+  aka :github
+
   def install
     system "rake", "install", "prefix=#{prefix}"
   end
